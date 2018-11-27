@@ -87,7 +87,8 @@ void LMICeulike_updateTx(ostime_t txbeg) {
         // Update channel/global duty cycle stats
         xref2band_t band = &LMIC.bands[freq & 0x3];
         LMIC.freq = freq & ~(u4_t)3;
-        LMIC.txpow = band->txpow;
+        // limit power to value ask in adr
+        LMIC.txpow = band->txpow > LMIC.adrTxPow ? LMIC.adrTxPow : band->txpow;
         band->avail = txbeg + airtime * band->txcap;
         if (LMIC.globalDutyRate != 0)
                 LMIC.globalDutyAvail = txbeg + (airtime << LMIC.globalDutyRate);

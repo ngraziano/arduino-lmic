@@ -1721,7 +1721,7 @@ static bit_t processJoinAccept_nojoinframe(void) {
         reportEventNoUpdate(EV_JOIN_TXCOMPLETE);
         int failed = LMICbandplan_nextJoinState();
 
-        if((LMIC.txend - LMIC.globalDutyAvail) < 0) {
+        if(LMIC.globalDutyRate != 0 && (LMIC.txend - LMIC.globalDutyAvail) < 0) {
             LMIC.txend = LMIC.globalDutyAvail;
             // Add random delay 10s is arbitrary
             LMIC.txend += LMICcore_rndDelay(10);

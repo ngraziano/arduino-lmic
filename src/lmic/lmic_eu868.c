@@ -98,8 +98,7 @@ static CONST_TABLE(u4_t, iniChannelFreq)[NUM_DEFAULT_CHANNELS] = {
         EU868_F3 | BAND_CENTI,
 };
 
-void LMICeu868_initDefaultChannels(bit_t join) {
-        LMIC_API_PARAMETER(join);
+void LMICeu868_initDefaultChannels() {
 
         os_clearMem(&LMIC.channelFreq, sizeof(LMIC.channelFreq));
 #if !defined(DISABLE_MCMD_DlChannelReq)
